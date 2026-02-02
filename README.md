@@ -1,2 +1,60 @@
-# short-term-electricity-demand-forecasting
-Hourly electricity demand forecasting using SARIMA, XGBoost and LSTM on household-level time series data.
+# Short-Term Electricity Consumption Forecasting
+
+## Overview
+This project focuses on short-term (1-hour ahead) forecasting of household electricity consumption using high-frequency energy data. The goal is to build realistic forecasting models while avoiding data leakage and ensuring proper temporal validation.
+
+## Dataset
+- Source: UCI / Kaggle – Electric Power Consumption Dataset
+- Time span: Dec 2006 – Nov 2010
+- Frequency: 1-minute measurements (aggregated to hourly)
+- Size: ~2 million observations
+
+The dataset includes global power consumption, voltage, intensity and appliance-level sub-metering. Missing values (~1.25%) were handled via interpolation.
+
+## Exploratory Data Analysis (EDA)
+An in-depth EDA was performed to uncover:
+- Daily and weekly consumption cycles
+- Seasonal patterns across years
+- Differences between appliance-level and residual consumption
+- Load variability during peak vs off-peak hours
+
+These insights guided feature engineering and model selection.
+
+## Modeling Approach
+Several models were compared using a strict time-based split:
+
+### Baselines
+- Random Walk (Persistence)
+- Seasonal Naive (same hour, previous year)
+
+### Models
+- SARIMA (seasonal statistical baseline)
+- XGBoost Regressor (lagged features + calendar features)
+- LSTM (single-step recurrent neural network)
+
+Only information available at prediction time was used.
+
+## Evaluation
+Models were evaluated on a held-out test set using:
+- MAE
+- RMSE
+- MAPE
+
+### Key Results
+- XGBoost outperformed SARIMA and naive baselines:  
+  - MAPE: 42.38%
+  - MAE: 316 kWh  
+- Single-step LSTM achieved comparable accuracy  
+  - MAE: 313 kWh
+- Multi-step LSTM in predicting the following 24 hours:
+  - MAE: 0.416 kWh
+
+## Technologies
+- Python (pandas, numpy, matplotlib, scikit-learn)
+- XGBoost
+- TensorFlow / Keras
+- Time series analysis
+
+## Authors
+Academic group project developed as part of the Machine Learning course.  
+Contributors: *Matteo Beschi, Quentin Bacher, Paul Prata Leal*
