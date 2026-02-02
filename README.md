@@ -4,7 +4,7 @@
 This project focuses on short-term (1-hour ahead) forecasting of household electricity consumption using high-frequency energy data. The goal is to build realistic forecasting models while avoiding data leakage and ensuring proper temporal validation.
 
 ## Dataset
-- Source: UCI / Kaggle – Electric Power Consumption Dataset
+- Source: [Kaggle – Household Electric Power Consumption](https://www.kaggle.com/datasets/uciml/electric-power-consumption-data-set/data)
 - Time span: Dec 2006 – Nov 2010
 - Frequency: 1-minute measurements (aggregated to hourly)
 - Size: ~2 million observations
@@ -16,9 +16,9 @@ An in-depth EDA was performed to uncover:
 - Daily and weekly consumption cycles
 - Seasonal patterns across years
 - Differences between appliance-level and residual consumption
-- Load variability during peak vs off-peak hours
+- Hourly and daily variability
 
-These insights guided feature engineering and model selection.
+These insights guided feature selection.
 
 ## Modeling Approach
 Several models were compared using a strict time-based split:
@@ -31,6 +31,7 @@ Several models were compared using a strict time-based split:
 - SARIMA (seasonal statistical baseline)
 - XGBoost Regressor (lagged features + calendar features)
 - LSTM (single-step recurrent neural network)
+- Multi-step LSTM (stacked architecture, used next for 24 hours forecast)
 
 Only information available at prediction time was used.
 
@@ -49,11 +50,11 @@ Models were evaluated on a held-out test set using:
 - Multi-step LSTM in predicting the following 24 hours:
   - MAE: 0.416 kWh
 
-## Technologies
+## Libraries
 - Python (pandas, numpy, matplotlib, scikit-learn)
 - XGBoost
 - TensorFlow / Keras
-- Time series analysis
+- Statsmodels
 
 ## Authors
 Academic group project developed as part of the Machine Learning course.  
