@@ -44,9 +44,9 @@ Models were evaluated on a held-out test set using:
 ### Key Results
 - XGBoost outperformed SARIMA and naive baselines:  
   - MAPE: 42.38%
-  - MAE: 316 kWh  
+  - MAE: 0.316 kWh  
 - Single-step LSTM achieved comparable accuracy  
-  - MAE: 313 kWh
+  - MAE: 0.313 kWh
 - Multi-step LSTM in predicting the following 24 hours:
   - MAE: 0.416 kWh
 
